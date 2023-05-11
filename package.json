@@ -1,0 +1,30 @@
+{
+  "name": "cj-courses",
+  "version": "1.0.0",
+  "description": "CJ Courses Backend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "NODE_ENV=developement nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ajaysharma12799/cj-courses.git"
+  },
+  "author": "Ajay Sharma",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ajaysharma12799/cj-courses/issues"
+  },
+  "homepage": "https://github.com/ajaysharma12799/cj-courses#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "mongoose": "^7.1.1",
+    "morgan": "^1.10.0"
+  },
+  "devDependencies": {
+    "dotenv": "^16.0.3",
+    "nodemon": "^2.0.22"
+  }
+}
