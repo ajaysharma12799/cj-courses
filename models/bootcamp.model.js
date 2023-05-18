@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const slugify = require("slugify");
 
 const BootcampSchema = new mongoose.Schema(
   {
@@ -51,5 +52,14 @@ const BootcampSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+// Document Middleware to Convert Bootcamp Name into Slug
+BootcampSchema.pre("save", function (next) {
+  this.slug = slugify(this.name, {
+    replacement: "-",
+    lower: true,
+  });
+  next();
+});
 
 module.exports = mongoose.model("bootcamp", BootcampSchema);
