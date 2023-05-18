@@ -8,14 +8,17 @@ const {
   deleteBootcamp,
 } = require("../controller/bootcamp.controller");
 
+// Admin Middleware Import
+const { isAdmin } = require('../middleware/isAdmin');
+
 router.get("/", getAllBootcamp);
 
 router.get("/:id", getSingleBootcamp);
 
-router.post("/", addBootcamp);
+router.post("/", isAdmin, addBootcamp);
 
-router.put("/:id", updateBootcamp);
+router.put("/:id", isAdmin, updateBootcamp);
 
-router.delete("/:id", deleteBootcamp);
+router.delete("/:id", isAdmin, deleteBootcamp);
 
 module.exports = router;
