@@ -5,6 +5,7 @@ const connectDB = require("./config/DBConfig");
 
 // Router File
 const BootcampRoute = require("./routes/bootcamp.routes");
+const UserRoute = require("./routes/user.routes");
 
 const app = express();
 const PORT = process.env.PORT || 4321;
@@ -27,6 +28,7 @@ app.get("/", (req, res) => {
 
 // Mount Routers
 app.use("/api/v1/bootcamp", BootcampRoute);
+app.use("/api/v1/user", UserRoute);
 
 app.listen(PORT, (error) => {
   if (error) {
