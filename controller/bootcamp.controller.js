@@ -3,7 +3,36 @@ const mongoose = require("mongoose");
 
 const getAllBootcamp = async (req, res) => {
   try {
-    const bootcamps = await BootcampModel.find().sort({ createdAt: -1 }); // Sorting Bootcamp based on Timestamp
+    let query;
+
+    // Copy Request Query
+    const reqQuery = { ...req.query };
+
+    // Selected Fields
+    const selectedFields = ["page", "limit"];
+
+    // Remove Selected Fields From Req Query
+    selectedFields.forEach((params) => delete reqQuery[params]);
+
+    let queryString = JSON.stringify(reqQuery);
+
+    queryString = queryString.replace(
+      /\b(gt|gte|lt|lte)\b/g,
+      (match) => `$${match}`
+    );
+
+    query = BootcampModel.find(JSON.parse(queryString)).sort({
+      createdAt: -1,
+    });
+
+    // Pagination
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 2;
+    const skip = (page - 1) * limit;
+
+    query = query.skip(skip).limit(limit);
+
+    const bootcamps = await query;
     res.status(200).json({
       status: "success",
       totalResult: bootcamps.length,
